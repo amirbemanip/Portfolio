@@ -26,60 +26,67 @@ export const Skills = () => {
           <div className="flex-1 h-px bg-white/10"></div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
 
           {/* ── Tech Stack ── */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            className="lg:col-span-7"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
-            <h2 className="font-heading font-black text-white uppercase tracking-tighter mb-10"
-              style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}
-            >
-              TECH<br />ARSENAL
+            <h2 className="font-heading font-black text-white uppercase tracking-tightest leading-none mb-12 text-giant">
+              TECH<br />ARSENAL<span className="text-white/20">.</span>
             </h2>
-            <div className="flex flex-wrap gap-2.5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-px bg-white/10 border border-white/10">
               {TECH.map((t, i) => (
-                <motion.span
+                <motion.div
                   key={t}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.35, delay: 0.03 * i }}
-                  className="hover-target font-mono text-xs tracking-widest uppercase px-4 py-2.5 border border-white/25 text-white/70 hover:border-white hover:text-white transition-all duration-300 cursor-default"
+                  transition={{ duration: 0.5, delay: 0.02 * i }}
+                  className="bg-black aspect-square sm:aspect-video flex items-center justify-center p-4 group hover:bg-white transition-colors duration-500"
                 >
-                  {t}
-                </motion.span>
+                  <span className="font-mono text-[10px] tracking-widest uppercase text-white/50 group-hover:text-black group-hover:font-bold transition-colors text-center">
+                    {t}
+                  </span>
+                </motion.div>
               ))}
             </div>
           </motion.div>
 
           {/* ── Domains ── */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            className="lg:col-span-5 lg:pt-32"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h2 className="font-heading font-black text-white uppercase tracking-tighter mb-10"
-              style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}
+            <h2 className="font-heading font-black text-white uppercase tracking-tightest leading-none mb-12"
+              style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
             >
               DOMAIN<br />EXPERTISE
             </h2>
-            <div className="flex flex-col">
+            <div className="space-y-1">
               {DOMAINS.map((d, i) => (
                 <motion.div
                   key={d.name}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.08 * i }}
-                  className="hover-target border-b border-white/10 py-5 flex justify-between items-center group last:border-b-0"
+                  transition={{ duration: 0.5, delay: 0.1 * i }}
+                  className="group flex items-center justify-between py-6 border-b border-white/5 hover:border-white/20 transition-colors"
                 >
-                  <span className="font-sans text-base text-white/65 group-hover:text-white transition-colors duration-300">{d.name}</span>
-                  <span className="font-mono text-xs text-white/25 group-hover:text-white/60 transition-colors">{d.num}</span>
+                  <div className="flex items-center gap-6">
+                    <span className="font-mono text-[9px] text-white/20 group-hover:text-white/60 transition-colors tracking-widest">[{d.num}]</span>
+                    <span className="font-heading font-bold text-lg md:text-xl text-white/40 group-hover:text-white transition-all duration-300 uppercase tracking-tighter italic group-hover:not-italic">
+                      {d.name}
+                    </span>
+                  </div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </motion.div>
               ))}
             </div>

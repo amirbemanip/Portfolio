@@ -25,9 +25,9 @@ export const Navbar = () => {
       <motion.header
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 1, delay: 2.5, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-[200] transition-all duration-500 ${
-          scrolled ? 'py-4 border-b border-white/10 bg-black/80 backdrop-blur-xl' : 'py-6'
+          scrolled ? 'py-4 border-b border-white/10 bg-black/50 backdrop-blur-2xl' : 'py-8'
         }`}
       >
         <div className="px-6 md:px-12 flex items-center justify-between">

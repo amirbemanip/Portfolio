@@ -78,37 +78,44 @@ export const Experience = () => {
           </motion.div>
 
           {/* Right: experience list */}
-          <div className="lg:col-span-8 flex flex-col divide-y divide-white/10">
+          <div className="lg:col-span-8 flex flex-col">
             {EXPERIENCES.map((e, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.6, delay: 0.08 * i }}
-                className="py-10 group first:pt-0"
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.1 * i }}
+                className="relative pl-8 md:pl-16 py-12 border-l border-white/5 group first:pt-0"
               >
-                <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-3 mb-5">
+                {/* Timeline dot */}
+                <div className="absolute left-0 top-0 md:top-12 -translate-x-1/2 w-3 h-3 bg-black border border-white/20 rounded-full group-hover:scale-150 group-hover:bg-white group-hover:border-white transition-all duration-500 z-10"></div>
+
+                <div className="flex flex-col md:flex-row md:justify-between md:items-baseline gap-4 mb-8">
                   <div>
-                    <h3 className="font-heading font-black text-white text-2xl md:text-3xl tracking-tighter mb-1">
+                    <h3 className="font-heading font-black text-white text-3xl md:text-4xl tracking-tightest mb-2 uppercase group-hover:text-white transition-colors">
                       {e.title}
                     </h3>
-                    <p className="font-sans text-base text-white/55">{e.company} · {e.location}</p>
+                    <p className="font-mono text-[10px] tracking-widest text-white/30 uppercase">{e.company} · {e.location}</p>
                   </div>
                   <div className="flex flex-col items-start md:items-end gap-1 flex-shrink-0">
-                    <span className="font-mono text-xs tracking-[0.1em] text-white/50 whitespace-nowrap">{e.period}</span>
-                    <span className="font-mono text-[10px] tracking-widest text-white/30 uppercase">{e.type}</span>
+                    <span className="font-mono text-[10px] tracking-[0.2em] text-white/50 uppercase bg-white/5 px-3 py-1 rounded-full whitespace-nowrap">{e.period}</span>
                   </div>
                 </div>
 
-                <ul className="space-y-2.5">
+                <ul className="space-y-4 max-w-2xl">
                   {e.points.map((pt, j) => (
-                    <li key={j} className="flex gap-3 text-sm md:text-base text-white/55 font-light leading-relaxed">
-                      <span className="text-white/30 flex-shrink-0 mt-1 text-xs">▸</span>
+                    <li key={j} className="flex gap-4 text-base text-white/40 font-light leading-relaxed group-hover:text-white/60 transition-colors">
+                      <span className="font-mono text-[9px] text-white/20 mt-1.5">0{j+1}</span>
                       {pt}
                     </li>
                   ))}
                 </ul>
+
+                {/* Decorative background number */}
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 font-heading font-black text-white/[0.02] text-9xl pointer-events-none select-none">
+                  0{i+1}
+                </div>
               </motion.div>
             ))}
           </div>

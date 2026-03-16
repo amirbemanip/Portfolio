@@ -18,44 +18,43 @@ export const Contact = () => {
         </div>
 
         {/* Giant CTA headline */}
-        <motion.h2
-          className="font-heading font-black text-white uppercase tracking-tighter leading-[0.85] mb-16"
-          style={{ fontSize: 'clamp(3rem, 10vw, 9rem)' }}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.9 }}
-        >
-          LET'S<br />WORK<br />TOGETHER.
-        </motion.h2>
+        <div className="overflow-hidden mb-20">
+          <motion.h2
+            className="font-heading font-black text-white uppercase tracking-tightest leading-[0.8] text-huge"
+            initial={{ y: '100%' }}
+            whileInView={{ y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            LET'S<br />WORK<br />TOGETHER<span className="text-white/20">.</span>
+          </motion.h2>
+        </div>
 
         {/* Contact links */}
-        <div className="flex flex-col">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border-y border-white/10">
           {CONTACTS.map((c, i) => (
             <motion.a
               key={c.label}
               href={c.href}
               target={c.href.startsWith('http') ? '_blank' : undefined}
               rel="noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-30px' }}
-              transition={{ duration: 0.5, delay: 0.07 * i }}
-              className="hover-target border-b border-white/10 py-7 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 group"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 * i }}
+              className="hover-target bg-black p-8 md:p-12 flex flex-col justify-between group transition-colors duration-500 hover:bg-white"
             >
-              <div className="flex items-center gap-5">
-                <span className="font-mono text-xs text-white/25 w-5">{c.num}</span>
-                <span className="font-heading font-black text-white/50 group-hover:text-white transition-colors duration-300 uppercase tracking-tighter"
-                  style={{ fontSize: 'clamp(1.5rem, 4vw, 3rem)' }}
-                >
-                  {c.label}
-                </span>
-              </div>
-              <div className="flex items-center gap-4 pl-10 sm:pl-0">
-                <span className="font-mono text-sm text-white/40 group-hover:text-white/70 transition-colors">{c.value}</span>
-                <div className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/25 group-hover:border-white group-hover:bg-white group-hover:text-black transition-all duration-300 text-base flex-shrink-0">
+              <div className="flex justify-between items-start mb-12">
+                <span className="font-mono text-[9px] tracking-widest text-white/20 group-hover:text-black/40 uppercase">[{c.num}]</span>
+                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 group-hover:border-black/10 group-hover:text-black transition-all duration-500">
                   ↗
                 </div>
+              </div>
+              <div>
+                <span className="block font-mono text-[10px] tracking-widest text-white/30 group-hover:text-black/40 uppercase mb-2">{c.label}</span>
+                <span className="font-heading font-black text-2xl md:text-3xl text-white group-hover:text-black uppercase tracking-tightest transition-colors">
+                  {c.value}
+                </span>
               </div>
             </motion.a>
           ))}

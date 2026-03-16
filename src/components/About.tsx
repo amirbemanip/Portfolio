@@ -18,50 +18,59 @@ export const About = () => {
           <div className="flex-1 h-px bg-white/10"></div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-          {/* ── LEFT: Bio ── */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-y-16 items-start">
+
+          {/* Headline spans 8 cols */}
           <motion.div
+            className="md:col-span-8"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h2 className="font-heading font-black text-white uppercase tracking-tightest leading-[0.8] mb-6 text-giant">
+              BRIDGING<br />DATA &amp;<br />ENGINEERING<span className="text-white/20">.</span>
+            </h2>
+          </motion.div>
+
+          {/* Bio spans 4 cols but offset or on next row */}
+          <motion.div
+            className="md:col-start-8 md:col-span-5 md:-mt-20"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h2 className="font-heading font-black text-white uppercase tracking-tighter leading-[0.88] mb-10"
-              style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
-            >
-              BRIDGING<br />DATA &amp;<br />ENGINEERING.
-            </h2>
-            <div className="space-y-5 text-white/65 text-base md:text-lg font-light leading-relaxed">
-              <p>
-                I'm a Data Science M.Sc. student at SRH University Heidelberg, specializing in Digital Health. My background in Occupational Health &amp; Safety gives me a uniquely analytical, compliance-driven view of system architecture and human-centered design.
+            <div className="space-y-6 text-white/50 text-base md:text-lg font-light leading-relaxed">
+              <p className="text-white/80">
+                I'm a Data Science M.Sc. student at SRH University Heidelberg, specializing in Digital Health. My background in Occupational Health & Safety gives me a uniquely analytical view of system architecture.
               </p>
               <p>
-                Currently based in Nuremberg, I architect full-stack applications and ML data pipelines — from PostgreSQL schema design and NestJS APIs to React frontends and PyTorch training loops.
+                Based in Nuremberg, I architect full-stack applications and ML pipelines — from PostgreSQL and NestJS to React and PyTorch.
               </p>
-              <p className="text-white/90 font-medium border-l-2 border-white/30 pl-4">
-                Actively seeking a <strong>Working Student / Junior role</strong> in Data Science or Fullstack Engineering.
+              <p className="text-white font-medium border-l border-white/30 pl-6 py-2">
+                Seeking <strong>Working Student / Junior roles</strong> in Data Science or Fullstack Engineering.
               </p>
             </div>
           </motion.div>
 
-          {/* ── RIGHT: Stat Grid ── */}
+          {/* Stats Grid spans full width but in editorial style */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            className="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12 md:mt-24"
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.8, delay: 0.15 }}
-            className="grid grid-cols-2 gap-px bg-white/10"
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.4 }}
           >
             {STATS.map((s, i) => (
               <div
                 key={i}
-                className="bg-black p-6 md:p-8 flex flex-col justify-between min-h-[140px] hover:bg-white/5 transition-colors duration-500 group"
+                className="group relative border border-white/5 bg-white/[0.02] p-8 transition-all duration-500 hover:border-white/20 hover:bg-white/[0.04]"
               >
-                <span className="font-mono text-[10px] tracking-[0.25em] text-white/35 uppercase mb-4">{s.label}</span>
-                <div>
-                  <div className="font-heading font-black text-xl md:text-2xl text-white tracking-tighter mb-1">{s.value}</div>
-                  <div className="font-mono text-xs text-white/40">{s.sub}</div>
-                </div>
+                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
+                <span className="block font-mono text-[9px] tracking-widest text-white/25 uppercase mb-8">[{s.label}]</span>
+                <div className="font-heading font-black text-2xl text-white tracking-tighter mb-2 uppercase">{s.value}</div>
+                <div className="font-mono text-[10px] text-white/30 leading-relaxed uppercase tracking-wider">{s.sub}</div>
               </div>
             ))}
           </motion.div>
