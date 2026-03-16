@@ -96,7 +96,7 @@ const ExperienceCard = ({ experience }: { experience: typeof EXPERIENCES[0] }) =
 
 export const Experience = () => {
   return (
-    <section id="experience" className="py-28 px-6 md:px-16 bg-primary">
+    <section id="experience" className="py-28 px-6 md:px-16 bg-[#050505] border-t border-white/5 relative z-10">
       <div className="max-w-7xl mx-auto">
         <motion.div
            initial={{ opacity: 0, y: -20 }}
