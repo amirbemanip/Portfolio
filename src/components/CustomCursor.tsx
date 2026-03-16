@@ -27,14 +27,24 @@ export const CustomCursor = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 rounded-full bg-white mix-blend-difference pointer-events-none z-[99999]"
+      className="fixed top-0 left-0 rounded-full bg-white mix-blend-difference pointer-events-none z-[99999] flex items-center justify-center overflow-hidden"
       animate={{
-        x: mouse.x - (hovering ? 20 : 6),
-        y: mouse.y - (hovering ? 20 : 6),
-        width: hovering ? 40 : 12,
-        height: hovering ? 40 : 12,
+        x: mouse.x - (hovering ? 40 : 6),
+        y: mouse.y - (hovering ? 40 : 6),
+        width: hovering ? 80 : 12,
+        height: hovering ? 80 : 12,
       }}
-      transition={{ type: 'spring', stiffness: 900, damping: 40, mass: 0.08 }}
-    />
+      transition={{ type: 'spring', stiffness: 1000, damping: 50, mass: 0.1 }}
+    >
+      {hovering && (
+        <motion.span
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="font-mono text-[10px] font-bold text-black uppercase"
+        >
+          View
+        </motion.span>
+      )}
+    </motion.div>
   );
 };

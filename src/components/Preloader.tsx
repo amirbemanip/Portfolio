@@ -52,37 +52,50 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
           </div>
 
           {/* Center: giant counter */}
-          <div className="flex flex-col items-center justify-center flex-1">
+          <div className="flex flex-col items-center justify-center flex-1 relative">
             <motion.div
-              className="font-heading font-black text-white leading-none"
-              style={{ fontSize: 'clamp(6rem, 25vw, 20rem)' }}
-              animate={{ opacity: 1 }}
+              className="font-heading font-black text-white leading-none tracking-tightest select-none"
+              style={{ fontSize: 'clamp(8rem, 35vw, 25rem)' }}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               {Math.floor(progress)}
+            </motion.div>
+            <motion.div
+              className="absolute font-mono text-[10px] tracking-widest text-white/20 uppercase"
+              style={{ bottom: '15%' }}
+              animate={{ opacity: [0.2, 0.5, 0.2] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              System Authorization in Progress
             </motion.div>
           </div>
 
           {/* Bottom: terminal log + progress bar */}
-          <div className="space-y-6">
-            <div className="h-20 overflow-hidden flex flex-col justify-end gap-1">
-              <AnimatePresence>
-                {lines.slice(-4).map((line, i) => (
+          <div className="space-y-10 max-w-xl mx-auto w-full">
+            <div className="h-24 overflow-hidden flex flex-col justify-end gap-1.5 px-4">
+              <AnimatePresence mode="popLayout">
+                {lines.slice(-5).map((line, i) => (
                   <motion.div
                     key={line + i}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="font-mono text-xs text-white/40 tracking-widest"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="font-mono text-[10px] text-white/40 tracking-widest uppercase"
                   >
+                    <span className="text-white/20 mr-2">[{new Date().toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })}]</span>
                     {line}
                   </motion.div>
                 ))}
               </AnimatePresence>
             </div>
-            <div className="w-full h-px bg-white/10 relative overflow-hidden">
+            <div className="w-full h-[2px] bg-white/5 relative overflow-hidden">
               <motion.div
                 className="absolute left-0 top-0 h-full bg-white"
                 animate={{ width: `${progress}%` }}
-                transition={{ ease: 'linear', duration: 0.08 }}
+                transition={{ ease: 'linear', duration: 0.1 }}
               />
             </div>
           </div>

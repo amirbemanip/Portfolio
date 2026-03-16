@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -43,23 +44,49 @@ export const Projects = () => {
       const track = trackRef.current;
       if (!track) return;
 
-      // Let GSAP measure after paint
       ScrollTrigger.refresh();
       const scrollPx = track.scrollWidth - window.innerWidth;
 
-      gsap.to(track, {
-        x: -scrollPx,
-        ease: 'none',
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
           end: `+=${scrollPx}`,
           pin: true,
-          scrub: 1.5,
+          scrub: 1,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            // Velocity-based skew effect
+            const skew = self.getVelocity() / 300;
+            gsap.to(track, { skewX: skew, duration: 0.5, ease: 'power2.out' });
+          }
         },
       });
+
+      tl.to(track, {
+        x: -scrollPx,
+        ease: 'none',
+      });
+
+      // Parallax effect for project numbers
+      PROJECTS.forEach((_, i) => {
+        gsap.fromTo(`.project-num-${i}`,
+          { x: 100 },
+          {
+            x: -100,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: `.project-card-${i}`,
+              containerAnimation: tl,
+              start: 'left right',
+              end: 'right left',
+              scrub: true
+            }
+          }
+        );
+      });
+
     }, sectionRef);
 
     return () => ctx.revert();
@@ -79,15 +106,15 @@ export const Projects = () => {
         className="flex h-screen"
         style={{ width: `${PROJECTS.length * 100}vw` }}
       >
-        {PROJECTS.map((p) => (
+        {PROJECTS.map((p, i) => (
           <div
             key={p.num}
-            className="relative w-screen h-screen flex-shrink-0 flex flex-col justify-between px-6 md:px-16 pt-20 pb-12 border-r border-white/5"
+            className={`project-card-${i} relative w-screen h-screen flex-shrink-0 flex flex-col justify-between px-6 md:px-16 pt-32 pb-16 border-r border-white/5 bg-[#050505]`}
           >
             {/* Giant semi-transparent number — pushed to background */}
             <div
-              className="absolute bottom-0 right-0 font-heading font-black text-white/[0.04] leading-none select-none pointer-events-none"
-              style={{ fontSize: 'clamp(12rem, 35vw, 30rem)', lineHeight: 0.8 }}
+              className={`project-num-${i} absolute bottom-0 right-0 font-heading font-black text-white/[0.03] leading-none select-none pointer-events-none`}
+              style={{ fontSize: 'clamp(15rem, 45vw, 40rem)', lineHeight: 0.7 }}
             >
               {p.num}
             </div>
@@ -99,14 +126,19 @@ export const Projects = () => {
             </div>
 
             {/* Middle: big title + description */}
-            <div className="z-10 max-w-4xl">
-              <h3
-                className="font-heading font-black text-white uppercase tracking-tighter leading-[0.9] mb-8"
-                style={{ fontSize: 'clamp(2.8rem, 7vw, 7rem)' }}
-              >
-                {p.title}
-              </h3>
-              <p className="font-sans text-base md:text-lg text-white/65 font-light leading-relaxed max-w-2xl">
+            <div className="z-10 max-w-5xl">
+              <div className="overflow-hidden mb-6">
+                <motion.h3
+                  className="font-heading font-black text-white uppercase tracking-tightest leading-[0.8] text-huge"
+                  initial={{ y: '100%' }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  {p.title}
+                </motion.h3>
+              </div>
+              <p className="font-sans text-base md:text-xl text-white/40 font-light leading-relaxed max-w-2xl">
                 {p.description}
               </p>
             </div>

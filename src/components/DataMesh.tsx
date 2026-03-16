@@ -15,13 +15,20 @@ export const DataMesh = () => {
     const color1 = new THREE.Color('#00F0FF'); // Cyan
     const color2 = new THREE.Color('#7000FF'); // Deep Purple
 
+    // Deterministic random seed
+    let seed = 123;
+    const pseudoRandom = () => {
+      seed = (seed * 16807) % 2147483647;
+      return (seed - 1) / 2147483646;
+    };
+
     for (let i = 0; i < count; i++) {
       // Create a swirling galaxy / abstract data cloud shape
-      const theta = Math.random() * Math.PI * 2;
-      const r = Math.pow(Math.random(), 0.5) * 15;
+      const theta = pseudoRandom() * Math.PI * 2;
+      const r = Math.pow(pseudoRandom(), 0.5) * 15;
       
       const x = r * Math.cos(theta);
-      const y = (Math.random() - 0.5) * 10;
+      const y = (pseudoRandom() - 0.5) * 10;
       const z = r * Math.sin(theta);
 
       positions[i * 3] = x;
@@ -29,7 +36,7 @@ export const DataMesh = () => {
       positions[i * 3 + 2] = z;
 
       // Mix colors based on distance from center
-      const mixedColor = color1.clone().lerp(color2, Math.random() + (r / 15));
+      const mixedColor = color1.clone().lerp(color2, pseudoRandom() + (r / 15));
       colors[i * 3] = mixedColor.r;
       colors[i * 3 + 1] = mixedColor.g;
       colors[i * 3 + 2] = mixedColor.b;
