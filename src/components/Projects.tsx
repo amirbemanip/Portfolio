@@ -1,168 +1,152 @@
-import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import Tilt from "react-parallax-tilt";
+import { motion } from "framer-motion";
 
 const PROJECTS = [
   {
-    num: '01',
-    title: 'Heart Disease Prediction',
-    category: 'Machine Learning · University Project',
-    year: '2026',
+    name: "Heart Disease Prediction",
     description:
-      'Evaluated Logistic Regression, KNN, SVM & Random Forest models on UCI Heart Disease data. Achieved >80% accuracy and AUC >0.85. Includes full EDA, cross-validation, and ROC curve analysis.',
-    stack: ['Python', 'scikit-learn', 'PyTorch', 'Pandas', 'Seaborn'],
+      "Evaluated Logistic Regression, KNN, SVM & Random Forest models on UCI Heart Disease data. Achieved >80% accuracy and AUC >0.85.",
+    tags: [
+      { name: "python", color: "blue-text-gradient" },
+      { name: "scikit-learn", color: "green-text-gradient" },
+      { name: "pytorch", color: "pink-text-gradient" },
+    ],
+    image: "https://raw.githubusercontent.com/ladunjexa/reactjs18-3d-portfolio/main/.github/README_ASSETS/3d-portfolio.png", // Placeholder
+    source_code_link: "https://github.com/",
   },
   {
-    num: '02',
-    title: 'Dönerhaus Nürnberg',
-    category: 'Full-Stack Web Platform',
-    year: '2026',
+    name: "Dönerhaus Nürnberg",
     description:
-      'Complete restaurant web platform: marketing site, digital loyalty club with QR membership cards, admin panel, and seller dashboard. Multi-role JWT auth, animated UI, fully responsive.',
-    stack: ['Next.js 14', 'TypeScript', 'Supabase', 'Prisma', 'Tailwind CSS'],
+      "Complete restaurant web platform: marketing site, digital loyalty club with QR membership cards, admin panel, and seller dashboard.",
+    tags: [
+      { name: "nextjs", color: "blue-text-gradient" },
+      { name: "supabase", color: "green-text-gradient" },
+      { name: "tailwind", color: "pink-text-gradient" },
+    ],
+    image: "https://raw.githubusercontent.com/ladunjexa/reactjs18-3d-portfolio/main/.github/README_ASSETS/3d-portfolio.png", // Placeholder
+    source_code_link: "https://github.com/",
   },
   {
-    num: '03',
-    title: 'Persia Market',
-    category: 'Multi-Role E-Commerce Ecosystem',
-    year: '2025–2026',
+    name: "Persia Market",
     description:
-      'Multi-platform marketplace with separate admin, seller, buyer & courier interfaces. Real-time inventory, payment tracking, GPS store finder. PostgreSQL schema with automated Prisma migrations.',
-    stack: ['NestJS', 'Next.js', 'Flutter', 'PostgreSQL', 'Prisma ORM'],
+      "Multi-platform marketplace with separate admin, seller, buyer & courier interfaces. Real-time inventory, payment tracking.",
+    tags: [
+      { name: "nestjs", color: "blue-text-gradient" },
+      { name: "nextjs", color: "green-text-gradient" },
+      { name: "postgresql", color: "pink-text-gradient" },
+    ],
+    image: "https://raw.githubusercontent.com/ladunjexa/reactjs18-3d-portfolio/main/.github/README_ASSETS/3d-portfolio.png", // Placeholder
+    source_code_link: "https://github.com/",
   },
 ];
 
-export const Projects = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
+interface ProjectTag {
+  name: string;
+  color: string;
+}
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const track = trackRef.current;
-      if (!track) return;
+interface ProjectCardProps {
+  index: number;
+  name: string;
+  description: string;
+  tags: ProjectTag[];
+  image: string;
+  source_code_link: string;
+}
 
-      ScrollTrigger.refresh();
-      const scrollPx = track.scrollWidth - window.innerWidth;
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: `+=${scrollPx}`,
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            // Velocity-based skew effect
-            const skew = self.getVelocity() / 300;
-            gsap.to(track, { skewX: skew, duration: 0.5, ease: 'power2.out' });
-          }
-        },
-      });
-
-      tl.to(track, {
-        x: -scrollPx,
-        ease: 'none',
-      });
-
-      // Parallax effect for project numbers
-      PROJECTS.forEach((_, i) => {
-        gsap.fromTo(`.project-num-${i}`,
-          { x: 100 },
-          {
-            x: -100,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: `.project-card-${i}`,
-              containerAnimation: tl,
-              start: 'left right',
-              end: 'right left',
-              scrub: true
-            }
-          }
-        );
-      });
-
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
+const ProjectCard = ({
+  index,
+  name,
+  description,
+  tags,
+  image,
+  source_code_link,
+}: ProjectCardProps) => {
   return (
-    <section ref={sectionRef} id="projects" className="relative overflow-hidden bg-black">
-      {/* Section label */}
-      <div className="absolute top-8 left-6 md:left-16 z-30 flex items-center gap-4">
-        <span className="font-mono text-xs tracking-[0.3em] text-white/50 uppercase">03 — Work</span>
-        <div className="w-12 h-px bg-white/20"></div>
-      </div>
-
-      {/* Horizontal scroll container */}
-      <div
-        ref={trackRef}
-        className="flex h-screen"
-        style={{ width: `${PROJECTS.length * 100}vw` }}
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.2 }}
+    >
+      <Tilt
+        // @ts-expect-error - Tilt options type mismatch
+        options={{
+          max: 45,
+          scale: 1,
+          speed: 450,
+        }}
+        className='bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full'
       >
-        {PROJECTS.map((p, i) => (
-          <div
-            key={p.num}
-            className={`project-card-${i} relative w-screen h-screen flex-shrink-0 flex flex-col justify-between px-6 md:px-16 pt-32 pb-16 border-r border-white/5 bg-[#050505]`}
-          >
-            {/* Giant semi-transparent number — pushed to background */}
+        <div className='relative w-full h-[230px]'>
+          <img
+            src={image}
+            alt='project_image'
+            className='w-full h-full object-cover rounded-2xl'
+          />
+
+          <div className='absolute inset-0 flex justify-end m-3 card-img_hover'>
             <div
-              className={`project-num-${i} absolute bottom-0 right-0 font-heading font-black text-white/[0.03] leading-none select-none pointer-events-none`}
-              style={{ fontSize: 'clamp(15rem, 45vw, 40rem)', lineHeight: 0.7 }}
+              onClick={() => window.open(source_code_link, "_blank")}
+              className='black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'
             >
-              {p.num}
-            </div>
-
-            {/* Top: category + year */}
-            <div className="flex justify-between items-start z-10 mt-8">
-              <span className="font-mono text-xs tracking-[0.2em] text-white/50 uppercase">{p.category}</span>
-              <span className="font-mono text-xs tracking-[0.2em] text-white/35">{p.year}</span>
-            </div>
-
-            {/* Middle: big title + description */}
-            <div className="z-10 max-w-5xl">
-              <div className="overflow-hidden mb-6">
-                <motion.h3
-                  className="font-heading font-black text-white uppercase tracking-tightest leading-[0.8] text-huge"
-                  initial={{ y: '100%' }}
-                  whileInView={{ y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  {p.title}
-                </motion.h3>
-              </div>
-              <p className="font-sans text-base md:text-xl text-white/40 font-light leading-relaxed max-w-2xl">
-                {p.description}
-              </p>
-            </div>
-
-            {/* Bottom: stack tags */}
-            <div className="z-10 flex flex-wrap gap-3">
-              {p.stack.map(t => (
-                <span
-                  key={t}
-                  className="font-mono text-xs tracking-widest uppercase border border-white/20 text-white/55 px-4 py-2.5 hover:border-white/60 hover:text-white transition-all duration-300 cursor-default"
-                >
-                  {t}
-                </span>
-              ))}
+              <span className="text-white text-[10px] font-bold">GH</span>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
 
-      {/* Scroll hint */}
-      <div className="absolute bottom-8 right-6 md:right-16 z-30 hidden md:flex items-center gap-3">
-        <span className="font-mono text-[10px] tracking-[0.3em] text-white/35 uppercase">Scroll to explore</span>
-        <div className="w-8 h-px bg-white/25"></div>
-        <span className="text-white/35">→</span>
+        <div className='mt-5'>
+          <h3 className='text-white font-bold text-[24px]'>{name}</h3>
+          <p className='mt-2 text-secondary text-[14px]'>{description}</p>
+        </div>
+
+        <div className='mt-4 flex flex-wrap gap-2'>
+          {tags.map((tag) => (
+            <p
+              key={`${name}-${tag.name}`}
+              className={`text-[14px] ${tag.color}`}
+            >
+              #{tag.name}
+            </p>
+          ))}
+        </div>
+      </Tilt>
+    </motion.div>
+  );
+};
+
+export const Projects = () => {
+  return (
+    <section id="projects" className="py-28 px-6 md:px-16 bg-primary">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+           initial={{ opacity: 0, y: -20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           transition={{ duration: 0.5 }}
+        >
+          <p className="font-mono text-secondary text-[14px] tracking-wider uppercase">My work</p>
+          <h2 className="text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]">Projects.</h2>
+        </motion.div>
+
+        <div className='w-full flex'>
+          <motion.p
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className='mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]'
+          >
+            Following projects showcases my skills and experience through
+            real-world examples of my work. Each project is briefly described with
+            links to code repositories and live demos in it. It reflects my
+            ability to solve complex problems, work with different technologies,
+            and manage projects effectively.
+          </motion.p>
+        </div>
+
+        <div className='mt-20 flex flex-wrap gap-7'>
+          {PROJECTS.map((project, index) => (
+            <ProjectCard key={`project-${index}`} index={index} {...project} />
+          ))}
+        </div>
       </div>
     </section>
   );
