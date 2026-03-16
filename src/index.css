@@ -133,3 +133,31 @@
   background: #915eff;
   transition: width 0.3s ease-in-out;
 }
+
+.text-giant {
+  font-size: clamp(4rem, 12vw, 10rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+}
+
+::selection {
+  background: #915eff;
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050816;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #151030;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #915eff;
+}

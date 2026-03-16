@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Suspense, lazy } from 'react';
+import { SpotlightCard } from './SpotlightCard';
 
 const BallCanvas = lazy(() => import('./BallCanvas'));
 
@@ -38,7 +39,7 @@ export const Skills = () => {
 
           {/* ── Tech Stack ── */}
           <motion.div
-            className="lg:col-span-7"
+            className="lg:col-span-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -63,7 +64,7 @@ export const Skills = () => {
 
           {/* ── Domains ── */}
           <motion.div
-            className="lg:col-span-5 lg:pt-32"
+            className="lg:col-span-6 lg:pt-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -74,26 +75,28 @@ export const Skills = () => {
             >
               DOMAIN<br />EXPERTISE
             </h2>
-            <div className="space-y-1">
-              {DOMAINS.map((d, i) => (
-                <motion.div
-                  key={d.name}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.1 * i }}
-                  className="group flex items-center justify-between py-6 border-b border-white/5 hover:border-white/20 transition-colors"
-                >
-                  <div className="flex items-center gap-6">
-                    <span className="font-mono text-[9px] text-white/20 group-hover:text-white/60 transition-colors tracking-widest">[{d.num}]</span>
-                    <span className="font-heading font-bold text-lg md:text-xl text-white/40 group-hover:text-white transition-all duration-300 uppercase tracking-tighter italic group-hover:not-italic">
-                      {d.name}
-                    </span>
-                  </div>
-                  <div className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                </motion.div>
-              ))}
-            </div>
+            <SpotlightCard className="p-8 bg-tertiary/20 border-white/5 rounded-3xl">
+              <div className="space-y-1">
+                {DOMAINS.map((d, i) => (
+                  <motion.div
+                    key={d.name}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.1 * i }}
+                    className="group flex items-center justify-between py-6 border-b border-white/5 hover:border-white/20 transition-colors"
+                  >
+                    <div className="flex items-center gap-6">
+                      <span className="font-mono text-[9px] text-white/20 group-hover:text-white/60 transition-colors tracking-widest">[{d.num}]</span>
+                      <span className="font-heading font-bold text-lg md:text-xl text-white/40 group-hover:text-white transition-all duration-300 uppercase tracking-tighter italic group-hover:not-italic">
+                        {d.name}
+                      </span>
+                    </div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  </motion.div>
+                ))}
+              </div>
+            </SpotlightCard>
           </motion.div>
 
         </div>

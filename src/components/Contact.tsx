@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Preload, Sphere, MeshDistortMaterial } from "@react-three/drei";
 import * as THREE from "three";
+import { MagneticButton } from "./MagneticButton";
 
 const Earth = () => {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -89,10 +90,10 @@ export const Contact = () => {
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className='flex-[0.75] bg-black-100 p-8 rounded-2xl'
+          className='flex-[0.75] bg-black-100 p-8 rounded-3xl border border-white/5'
         >
-          <p className="font-mono text-secondary text-[14px] tracking-wider uppercase">Get in touch</p>
-          <h3 className="text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]">Contact.</h3>
+          <p className="font-mono text-secondary text-[14px] tracking-widest uppercase mb-2">Get in touch</p>
+          <h3 className="text-white font-black md:text-[80px] sm:text-[60px] xs:text-[50px] text-[40px] tracking-tightest leading-tight">Contact.</h3>
 
           <form
             ref={formRef}
@@ -136,12 +137,14 @@ export const Contact = () => {
               />
             </label>
 
-            <button
-              type='submit'
-              className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary'
-            >
-              {loading ? "Sending..." : "Send"}
-            </button>
+            <MagneticButton>
+              <button
+                type='submit'
+                className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary hover-target'
+              >
+                {loading ? "Sending..." : "Send Message"}
+              </button>
+            </MagneticButton>
           </form>
         </motion.div>
 

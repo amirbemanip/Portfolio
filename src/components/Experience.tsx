@@ -103,8 +103,8 @@ export const Experience = () => {
            whileInView={{ opacity: 1, y: 0 }}
            transition={{ duration: 0.5 }}
         >
-          <p className="font-mono text-secondary text-[14px] tracking-wider uppercase">What I have done so far</p>
-          <h2 className="text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]">Work Experience.</h2>
+          <p className="font-mono text-secondary text-[14px] tracking-widest uppercase mb-2">What I have done so far</p>
+          <h2 className="text-white font-black md:text-[80px] sm:text-[60px] xs:text-[50px] text-[40px] tracking-tightest leading-tight">Work Experience.</h2>
         </motion.div>
 
         <div className='mt-20 flex flex-col'>
