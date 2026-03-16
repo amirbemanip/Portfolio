@@ -3,6 +3,7 @@ import { ReactLenis } from 'lenis/react';
 import { AnimatePresence } from 'framer-motion';
 import { Preloader } from './components/Preloader';
 import StarsCanvas from './components/StarsCanvas';
+import { BackgroundCanvas } from './components/BackgroundCanvas';
 import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -18,6 +19,9 @@ function App() {
   return (
     <ReactLenis root options={{ lerp: 0.08, duration: 1.5, smoothWheel: true }}>
       <div className="bg-primary min-h-screen text-white relative z-0 overflow-x-hidden">
+        {/* Grain Overlay */}
+        <div className="fixed inset-0 z-[99999] pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
+
         <CustomCursor />
         
         <AnimatePresence>
@@ -26,7 +30,7 @@ function App() {
         
         {!loading && (
           <>
-            {/* <BackgroundCanvas /> */}
+            <BackgroundCanvas />
             <StarsCanvas />
           </>
         )}

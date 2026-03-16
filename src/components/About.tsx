@@ -1,5 +1,11 @@
+import { useEffect, useRef } from "react";
 import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
+import { SpotlightCard } from "./SpotlightCard";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
@@ -21,22 +27,14 @@ const services = [
 ];
 
 const ServiceCard = ({ index, title, icon }: { index: number; title: string; icon: string }) => (
-  <Tilt className='xs:w-[250px] w-full'>
+  <Tilt className='xs:w-[280px] w-full mx-auto'>
     <motion.div
       initial={{ opacity: 0, x: -50 }}
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'
     >
-      <div
-        // @ts-expect-error - Tilt options type mismatch
-        options={{
-          max: 45,
-          scale: 1,
-          speed: 450,
-        }}
-        className='bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-center items-center flex-col'
-      >
+      <SpotlightCard className="bg-tertiary rounded-[20px] py-5 px-10 min-h-[280px] flex justify-center items-center flex-col border-none">
         <img
           src={icon}
           alt='web-development'
@@ -46,22 +44,42 @@ const ServiceCard = ({ index, title, icon }: { index: number; title: string; ico
         <h3 className='text-white text-[20px] font-bold text-center mt-4'>
           {title}
         </h3>
-      </div>
+      </SpotlightCard>
     </motion.div>
   </Tilt>
 );
 
 export const About = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".service-card", {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="about" className="py-28 px-6 md:px-16 bg-primary">
+    <section ref={sectionRef} id="about" className="py-28 px-6 md:px-16 bg-primary">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <p className="font-mono text-secondary text-[14px] tracking-wider uppercase">Introduction</p>
-          <h2 className="text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]">Overview.</h2>
+          <p className="font-mono text-secondary text-[14px] tracking-widest uppercase mb-2">Introduction</p>
+          <h2 className="text-white font-black md:text-[80px] sm:text-[60px] xs:text-[50px] text-[40px] tracking-tightest leading-tight">Overview.</h2>
         </motion.div>
 
         <motion.p
@@ -77,7 +95,9 @@ export const About = () => {
 
         <div className='mt-20 flex flex-wrap gap-10'>
           {services.map((service, index) => (
-            <ServiceCard key={service.title} index={index} {...service} />
+            <div key={service.title} className="service-card">
+              <ServiceCard index={index} {...service} />
+            </div>
           ))}
         </div>
       </div>

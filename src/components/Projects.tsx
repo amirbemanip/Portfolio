@@ -1,5 +1,11 @@
+import { useEffect, useRef } from "react";
 import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
+import { SpotlightCard } from "./SpotlightCard";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const PROJECTS = [
   {
@@ -68,15 +74,8 @@ const ProjectCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.2 }}
     >
-      <Tilt
-        // @ts-expect-error - Tilt options type mismatch
-        options={{
-          max: 45,
-          scale: 1,
-          speed: 450,
-        }}
-        className='bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full'
-      >
+      <Tilt className='sm:w-[360px] w-full'>
+        <SpotlightCard className='bg-tertiary p-5 rounded-2xl w-full border-none'>
         <div className='relative w-full h-[230px]'>
           <img
             src={image}
@@ -109,22 +108,43 @@ const ProjectCard = ({
             </p>
           ))}
         </div>
+        </SpotlightCard>
       </Tilt>
     </motion.div>
   );
 };
 
 export const Projects = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".project-card-gsap", {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        },
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.3,
+        ease: "power4.out",
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="projects" className="py-28 px-6 md:px-16 bg-primary">
+    <section ref={sectionRef} id="projects" className="py-28 px-6 md:px-16 bg-primary">
       <div className="max-w-7xl mx-auto">
         <motion.div
            initial={{ opacity: 0, y: -20 }}
            whileInView={{ opacity: 1, y: 0 }}
            transition={{ duration: 0.5 }}
         >
-          <p className="font-mono text-secondary text-[14px] tracking-wider uppercase">My work</p>
-          <h2 className="text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]">Projects.</h2>
+          <p className="font-mono text-secondary text-[14px] tracking-widest uppercase mb-2">My work</p>
+          <h2 className="text-white font-black md:text-[80px] sm:text-[60px] xs:text-[50px] text-[40px] tracking-tightest leading-tight">Projects.</h2>
         </motion.div>
 
         <div className='w-full flex'>
@@ -144,7 +164,9 @@ export const Projects = () => {
 
         <div className='mt-20 flex flex-wrap gap-7'>
           {PROJECTS.map((project, index) => (
-            <ProjectCard key={`project-${index}`} index={index} {...project} />
+            <div key={`project-${index}`} className="project-card-gsap">
+              <ProjectCard index={index} {...project} />
+            </div>
           ))}
         </div>
       </div>

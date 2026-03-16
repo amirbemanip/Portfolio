@@ -34,7 +34,7 @@ export const CustomCursor = () => {
         width: hovering ? 80 : 12,
         height: hovering ? 80 : 12,
       }}
-      transition={{ type: 'spring', stiffness: 1000, damping: 50, mass: 0.1 }}
+      transition={{ type: 'spring', stiffness: 1500, damping: 60, mass: 0.1 }}
     >
       {hovering && (
         <motion.span

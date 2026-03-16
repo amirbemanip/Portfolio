@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { MagneticButton } from './MagneticButton';
 
 const NAV_LINKS = [
   { label: 'ABOUT', href: '#about' },
@@ -36,27 +37,32 @@ export const Navbar = () => {
           </a>
 
           {/* Desktop */}
-          <nav className="hidden md:flex items-center gap-10">
+          <nav className="hidden md:flex items-center gap-6">
             {NAV_LINKS.map(link => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="hover-target font-mono text-xs tracking-[0.2em] text-white/40 hover:text-white transition-colors duration-300"
-              >
-                {link.label}
-              </a>
+              <MagneticButton key={link.label}>
+                <a
+                  href={link.href}
+                  className="hover-target px-4 py-2 font-mono text-xs tracking-[0.2em] text-white/40 hover:text-white transition-colors duration-300"
+                >
+                  {link.label}
+                </a>
+              </MagneticButton>
             ))}
           </nav>
 
-          <div className="hidden md:flex items-center gap-6">
-            <a href="https://github.com/amir-bemani" target="_blank" rel="noreferrer"
-              className="hover-target font-mono text-xs tracking-widest text-white/40 hover:text-white transition-colors">
-              GH
-            </a>
-            <a href="https://linkedin.com/in/amirbemani" target="_blank" rel="noreferrer"
-              className="hover-target font-mono text-xs tracking-widest text-white/40 hover:text-white transition-colors">
-              LI
-            </a>
+          <div className="hidden md:flex items-center gap-4">
+            <MagneticButton>
+              <a href="https://github.com/amir-bemani" target="_blank" rel="noreferrer"
+                className="hover-target p-2 font-mono text-xs tracking-widest text-white/40 hover:text-white transition-colors">
+                GH
+              </a>
+            </MagneticButton>
+            <MagneticButton>
+              <a href="https://linkedin.com/in/amirbemani" target="_blank" rel="noreferrer"
+                className="hover-target p-2 font-mono text-xs tracking-widest text-white/40 hover:text-white transition-colors">
+                LI
+              </a>
+            </MagneticButton>
           </div>
 
           {/* Mobile burger */}

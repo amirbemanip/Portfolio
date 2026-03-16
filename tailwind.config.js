@@ -15,6 +15,11 @@ export default {
       },
       boxShadow: {
         card: "0px 35px 120px -15px #211e35",
+        "premium-glow": "0 0 30px rgba(145, 94, 255, 0.3)",
+      },
+      letterSpacing: {
+        tightest: '-0.06em',
+        widest: '0.25em',
       },
       screens: {
         xs: "450px",
