@@ -1,10 +1,18 @@
 import { motion } from 'framer-motion';
+import { Suspense, lazy } from 'react';
+
+const BallCanvas = lazy(() => import('./BallCanvas'));
 
 const TECH = [
-  'Python 3', 'PyTorch', 'scikit-learn', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn',
-  'React', 'Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion',
-  'Node.js', 'NestJS', 'PostgreSQL', 'Prisma ORM', 'Supabase', 'JWT / Auth',
-  'Docker', 'AWS S3', 'GitHub CI/CD', 'Flutter', 'GSAP',
+  { name: 'Python 3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+  { name: 'PyTorch', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg' },
+  { name: 'scikit-learn', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg' }, // Fallback icon
+  { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+  { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+  { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
+  { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+  { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+  { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
 ];
 
 const DOMAINS = [
@@ -39,20 +47,16 @@ export const Skills = () => {
             <h2 className="font-heading font-black text-white uppercase tracking-tightest leading-none mb-12 text-giant">
               TECH<br />ARSENAL<span className="text-white/20">.</span>
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-px bg-white/10 border border-white/10">
-              {TECH.map((t, i) => (
-                <motion.div
-                  key={t}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.02 * i }}
-                  className="bg-black aspect-square sm:aspect-video flex items-center justify-center p-4 group hover:bg-white transition-colors duration-500"
-                >
-                  <span className="font-mono text-[10px] tracking-widest uppercase text-white/50 group-hover:text-black group-hover:font-bold transition-colors text-center">
-                    {t}
-                  </span>
-                </motion.div>
+            <div className="flex flex-row flex-wrap justify-center gap-10">
+              {TECH.map((t) => (
+                <div className="w-28 h-28" key={t.name}>
+                  <Suspense fallback={<div className="w-full h-full bg-white/5 rounded-full animate-pulse" />}>
+                    <BallCanvas icon={t.icon} />
+                  </Suspense>
+                  <p className="font-mono text-[10px] tracking-widest uppercase text-white/30 text-center mt-2">
+                    {t.name}
+                  </p>
+                </div>
               ))}
             </div>
           </motion.div>

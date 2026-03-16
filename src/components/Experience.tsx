@@ -1,4 +1,9 @@
-import { motion } from 'framer-motion';
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
+import { motion } from "framer-motion";
+import "react-vertical-timeline-component/style.min.css";
 
 const EXPERIENCES = [
   {
@@ -49,77 +54,68 @@ const EXPERIENCES = [
   },
 ];
 
+const ExperienceCard = ({ experience }: { experience: typeof EXPERIENCES[0] }) => {
+  return (
+    <VerticalTimelineElement
+      contentStyle={{
+        background: "#1d1836",
+        color: "#fff",
+      }}
+      contentArrowStyle={{ borderRight: "7px solid #232631" }}
+      date={experience.period}
+      iconStyle={{ background: "#383E56" }}
+      icon={
+        <div className='flex justify-center items-center w-full h-full'>
+          <div className="w-2 h-2 rounded-full bg-white"></div>
+        </div>
+      }
+    >
+      <div>
+        <h3 className='text-white text-[24px] font-bold'>{experience.title}</h3>
+        <p
+          className='text-secondary text-[16px] font-semibold'
+          style={{ margin: 0 }}
+        >
+          {experience.company}
+        </p>
+      </div>
+
+      <ul className='mt-5 list-disc ml-5 space-y-2'>
+        {experience.points.map((point, index) => (
+          <li
+            key={`experience-point-${index}`}
+            className='text-white-100 text-[14px] pl-1 tracking-wider'
+          >
+            {point}
+          </li>
+        ))}
+      </ul>
+    </VerticalTimelineElement>
+  );
+};
+
 export const Experience = () => {
   return (
-    <section id="experience" className="py-28 px-6 md:px-16 border-t border-white/10 bg-black">
+    <section id="experience" className="py-28 px-6 md:px-16 bg-primary">
       <div className="max-w-7xl mx-auto">
+        <motion.div
+           initial={{ opacity: 0, y: -20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           transition={{ duration: 0.5 }}
+        >
+          <p className="font-mono text-secondary text-[14px] tracking-wider uppercase">What I have done so far</p>
+          <h2 className="text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]">Work Experience.</h2>
+        </motion.div>
 
-        <div className="flex items-center gap-4 mb-16">
-          <span className="font-mono text-xs tracking-[0.3em] text-white/40 uppercase">04 — Experience</span>
-          <div className="flex-1 h-px bg-white/10"></div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-          
-          {/* Left: section title */}
-          <motion.div
-            className="lg:col-span-4"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2
-              className="font-heading font-black text-white uppercase tracking-tighter leading-[0.88] sticky top-28"
-              style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}
-            >
-              CAREER<br />TRAJECTORY
-            </h2>
-          </motion.div>
-
-          {/* Right: experience list */}
-          <div className="lg:col-span-8 flex flex-col">
-            {EXPERIENCES.map((e, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.1 * i }}
-                className="relative pl-8 md:pl-16 py-12 border-l border-white/5 group first:pt-0"
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-0 top-0 md:top-12 -translate-x-1/2 w-3 h-3 bg-black border border-white/20 rounded-full group-hover:scale-150 group-hover:bg-white group-hover:border-white transition-all duration-500 z-10"></div>
-
-                <div className="flex flex-col md:flex-row md:justify-between md:items-baseline gap-4 mb-8">
-                  <div>
-                    <h3 className="font-heading font-black text-white text-3xl md:text-4xl tracking-tightest mb-2 uppercase group-hover:text-white transition-colors">
-                      {e.title}
-                    </h3>
-                    <p className="font-mono text-[10px] tracking-widest text-white/30 uppercase">{e.company} · {e.location}</p>
-                  </div>
-                  <div className="flex flex-col items-start md:items-end gap-1 flex-shrink-0">
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-white/50 uppercase bg-white/5 px-3 py-1 rounded-full whitespace-nowrap">{e.period}</span>
-                  </div>
-                </div>
-
-                <ul className="space-y-4 max-w-2xl">
-                  {e.points.map((pt, j) => (
-                    <li key={j} className="flex gap-4 text-base text-white/40 font-light leading-relaxed group-hover:text-white/60 transition-colors">
-                      <span className="font-mono text-[9px] text-white/20 mt-1.5">0{j+1}</span>
-                      {pt}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Decorative background number */}
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 font-heading font-black text-white/[0.02] text-9xl pointer-events-none select-none">
-                  0{i+1}
-                </div>
-              </motion.div>
+        <div className='mt-20 flex flex-col'>
+          <VerticalTimeline animate={true} lineColor="rgba(255,255,255,0.05)">
+            {EXPERIENCES.map((experience, index) => (
+              <ExperienceCard
+                key={`experience-${index}`}
+                experience={experience}
+              />
             ))}
-          </div>
-
+          </VerticalTimeline>
         </div>
       </div>
     </section>
