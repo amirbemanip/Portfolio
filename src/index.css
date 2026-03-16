@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-black text-white font-sans antialiased overflow-x-hidden;
+  }
+
+  * {
+    cursor: none;
+    box-sizing: border-box;
+  }
+
+  ::selection {
+    background: white;
+    color: black;
+  }
+}
+
+@layer components {
+  .reveal-overflow {
+    overflow: hidden;
+  }
+
+  .hover-target {
+    @apply relative;
+  }
+}
+
+/* Brutalist scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #333; }
+::-webkit-scrollbar-thumb:hover { background: #666; }
