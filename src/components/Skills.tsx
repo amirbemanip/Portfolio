@@ -40,7 +40,7 @@ export const Skills = () => {
           <div className="flex-1 h-px bg-white/10"></div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-32">
 
           {/* ── Tech Stack ── */}
           <motion.div
@@ -50,7 +50,7 @@ export const Skills = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="font-heading font-black text-white uppercase tracking-tightest leading-none mb-12 text-giant">
+            <h2 className="font-heading font-black text-white uppercase tracking-tighter leading-none mb-12 text-giant">
               TECH<br />ARSENAL<span className="text-white/20">.</span>
             </h2>
             <div className="flex flex-row flex-wrap justify-center gap-10">
