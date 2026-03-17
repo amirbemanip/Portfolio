@@ -42,16 +42,6 @@ const EXPERIENCES = [
       'Assisted in risk assessments, safety inspections and compliance monitoring per healthcare regulations.',
     ],
   },
-  {
-    title: 'Working Student — Kitchen Assistant',
-    company: 'Dönerladen (Local Restaurant)',
-    location: 'Nuremberg, Germany',
-    period: 'Sep 2024 – Present',
-    type: 'Working Student · Germany',
-    points: [
-      'Supporting kitchen operations while pursuing M.Sc. studies at SRH University.',
-    ],
-  },
 ];
 
 const ExperienceCard = ({ experience }: { experience: typeof EXPERIENCES[0] }) => {
