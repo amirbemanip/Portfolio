@@ -67,6 +67,7 @@ const ProjectCard = ({
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.2 }}
     >
       <Tilt className='sm:w-[360px] w-full'>
@@ -116,6 +117,7 @@ export const Projects = () => {
         <motion.div
            initial={{ opacity: 0, y: -20 }}
            whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
            transition={{ duration: 0.5 }}
         >
           <p className="font-mono text-secondary text-[14px] tracking-widest uppercase mb-2">My work</p>
@@ -126,6 +128,7 @@ export const Projects = () => {
           <motion.p
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className='mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]'
           >

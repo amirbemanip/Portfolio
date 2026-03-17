@@ -1,6 +1,10 @@
-import { useState } from 'react';
-import { ReactLenis } from 'lenis/react';
+import { useState, useEffect } from 'react';
+import { ReactLenis, useLenis } from 'lenis/react';
 import { AnimatePresence } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 import { Preloader } from './components/Preloader';
 import StarsCanvas from './components/StarsCanvas';
 import { BackgroundCanvas } from './components/BackgroundCanvas';
@@ -15,6 +19,14 @@ import { Contact } from './components/Contact';
 
 function App() {
   const [loading, setLoading] = useState(true);
+
+  useLenis(() => {
+    ScrollTrigger.update();
+  });
+
+  useEffect(() => {
+    ScrollTrigger.refresh();
+  }, [loading]);
 
   return (
     <ReactLenis root options={{ lerp: 0.08, duration: 1.5, smoothWheel: true }}>

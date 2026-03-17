@@ -26,6 +26,7 @@ const ServiceCard = ({ index, title, icon }: { index: number; title: string; ico
     <motion.div
       initial={{ opacity: 0, x: -50 }}
       whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'
     >
@@ -51,6 +52,7 @@ export const About = () => {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
           <p className="font-mono text-secondary text-[14px] tracking-widest uppercase mb-2">Introduction</p>
@@ -60,6 +62,7 @@ export const About = () => {
         <motion.p
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
         >

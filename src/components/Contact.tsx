@@ -84,7 +84,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-28 px-6 md:px-16 bg-primary">
+    <section id="contact" className="py-28 px-6 md:px-16 bg-primary relative z-10">
       <div className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}>
         <motion.div
           initial={{ opacity: 0, x: -50 }}
