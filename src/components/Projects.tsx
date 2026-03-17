@@ -1,11 +1,6 @@
-import { useEffect, useRef } from "react";
 import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
 import { SpotlightCard } from "./SpotlightCard";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const PROJECTS = [
   {
@@ -72,6 +67,7 @@ const ProjectCard = ({
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.2 }}
     >
       <Tilt className='sm:w-[360px] w-full'>
@@ -115,32 +111,13 @@ const ProjectCard = ({
 };
 
 export const Projects = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".project-card-gsap", {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        },
-        y: 100,
-        opacity: 0,
-        duration: 1.2,
-        stagger: 0.3,
-        ease: "power4.out",
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section ref={sectionRef} id="projects" className="py-28 px-6 md:px-16 bg-primary">
+    <section id="projects" className="py-28 px-6 md:px-16 bg-primary relative z-10">
       <div className="max-w-7xl mx-auto">
         <motion.div
            initial={{ opacity: 0, y: -20 }}
            whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
            transition={{ duration: 0.5 }}
         >
           <p className="font-mono text-secondary text-[14px] tracking-widest uppercase mb-2">My work</p>
@@ -151,6 +128,7 @@ export const Projects = () => {
           <motion.p
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className='mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]'
           >

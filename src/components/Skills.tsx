@@ -27,13 +27,18 @@ const DOMAINS = [
 
 export const Skills = () => {
   return (
-    <section id="skills" className="py-28 px-6 md:px-16 border-t border-white/10 bg-[#080808]">
+    <section id="skills" className="py-28 px-6 md:px-16 border-t border-white/10 bg-[#080808] relative z-10">
       <div className="max-w-7xl mx-auto">
 
-        <div className="flex items-center gap-4 mb-16">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-4 mb-16"
+        >
           <span className="font-mono text-xs tracking-[0.3em] text-white/40 uppercase">02 — Skills</span>
           <div className="flex-1 h-px bg-white/10"></div>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
 

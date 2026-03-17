@@ -43,10 +43,10 @@ export const Hero = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "bottom top",
-          scrub: true,
+          end: "30% top",
+          scrub: 1,
         },
-        y: 200,
+        y: 100,
         opacity: 0,
       });
 
@@ -55,10 +55,10 @@ export const Hero = () => {
           trigger: containerRef.current,
           start: "top top",
           end: "bottom top",
-          scrub: true,
+          scrub: 1,
         },
-        scale: 0.8,
-        opacity: 0.5,
+        scale: 0.9,
+        opacity: 0.7,
       });
     }, containerRef);
 
@@ -67,13 +67,13 @@ export const Hero = () => {
 
   return (
     <section ref={containerRef} className="relative w-full h-screen mx-auto overflow-hidden">
-      <div ref={textRef} className="absolute inset-0 top-[120px] max-w-7xl mx-auto px-6 flex flex-row items-start gap-5 z-10 pointer-events-none">
+      <div ref={textRef} className="absolute inset-0 top-[120px] lg:top-[180px] max-w-7xl mx-auto px-6 flex flex-row items-start gap-5 z-10 pointer-events-none">
         <div className="flex flex-col justify-center items-center mt-5 hero-pin">
           <div className="w-5 h-5 rounded-full bg-[#915eff]" />
           <div className="w-1 sm:h-80 h-40 violet-gradient" />
         </div>
 
-        <div className="bg-black/20 backdrop-blur-xl border border-white/10 p-10 rounded-3xl">
+        <div className="bg-black/20 backdrop-blur-xl border border-white/10 p-6 md:p-10 rounded-3xl max-w-[90%] md:max-w-full">
           <h1 className="hero-title text-white font-black lg:text-[80px] sm:text-[60px] xs:text-[50px] text-[40px] lg:leading-[98px] mt-2 tracking-tightest">
             Hi, I'm <span className="text-[#915eff]">Amirhossein</span>
           </h1>

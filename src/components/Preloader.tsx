@@ -55,7 +55,7 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
           <div className="flex flex-col items-center justify-center flex-1 relative">
             <motion.div
               className="font-heading font-black text-white leading-none tracking-tightest select-none"
-              style={{ fontSize: 'clamp(8rem, 35vw, 25rem)' }}
+              style={{ fontSize: 'clamp(8rem, 25vw, 18rem)' }}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
