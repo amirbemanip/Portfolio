@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 import { Preloader } from './components/Preloader';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import StarsCanvas from './components/StarsCanvas';
 import { BackgroundCanvas } from './components/BackgroundCanvas';
 import { CustomCursor } from './components/CustomCursor';
@@ -61,14 +62,27 @@ function App() {
               <Contact />
             </div>
           </main>
-          <footer className="py-8 border-t border-white/10">
-            <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="font-mono text-xs text-white/30 tracking-widest uppercase">
-                © {new Date().getFullYear()} Amirhossein Bemani Vandish
-              </p>
-              <p className="font-mono text-xs text-white/20 tracking-widest uppercase">
-                Data Science · Fullstack Engineering
-              </p>
+          <footer className="py-12 border-t border-white/10 bg-black/20">
+            <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-8">
+              <div className="flex flex-col gap-2">
+                <p className="font-mono text-xs text-white/30 tracking-widest uppercase">
+                  © {new Date().getFullYear()} Amirhossein Bemani Vandish
+                </p>
+                <p className="font-mono text-xs text-white/20 tracking-widest uppercase text-center md:text-left">
+                  Data Science · Fullstack Engineering
+                </p>
+              </div>
+
+              <div className="flex items-center gap-6">
+                <a href="https://github.com/amir-bemani" target="_blank" rel="noreferrer"
+                  className="hover-target text-white/20 hover:text-white transition-colors duration-300">
+                  <FaGithub size={24} />
+                </a>
+                <a href="https://linkedin.com/in/amirbemani" target="_blank" rel="noreferrer"
+                  className="hover-target text-white/20 hover:text-white transition-colors duration-300">
+                  <FaLinkedin size={24} />
+                </a>
+              </div>
             </div>
           </footer>
         </div>

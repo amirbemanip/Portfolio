@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { MagneticButton } from './MagneticButton';
 
 const NAV_LINKS = [
@@ -53,14 +54,14 @@ export const Navbar = () => {
           <div className="hidden md:flex items-center gap-4">
             <MagneticButton>
               <a href="https://github.com/amir-bemani" target="_blank" rel="noreferrer"
-                className="hover-target p-2 font-mono text-xs tracking-widest text-white/40 hover:text-white transition-colors">
-                GH
+                className="hover-target p-2 text-white/40 hover:text-white transition-colors">
+                <FaGithub size={20} />
               </a>
             </MagneticButton>
             <MagneticButton>
               <a href="https://linkedin.com/in/amirbemani" target="_blank" rel="noreferrer"
-                className="hover-target p-2 font-mono text-xs tracking-widest text-white/40 hover:text-white transition-colors">
-                LI
+                className="hover-target p-2 text-white/40 hover:text-white transition-colors">
+                <FaLinkedin size={20} />
               </a>
             </MagneticButton>
           </div>

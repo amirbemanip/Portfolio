@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Preload, Sphere, MeshDistortMaterial } from "@react-three/drei";
 import * as THREE from "three";
+import { FaEnvelope, FaPhone, FaWhatsapp } from 'react-icons/fa';
 import { MagneticButton } from "./MagneticButton";
 
 const Earth = () => {
@@ -94,6 +95,27 @@ export const Contact = () => {
         >
           <p className="font-mono text-secondary text-[14px] tracking-widest uppercase mb-2">Get in touch</p>
           <h3 className="text-white font-black md:text-[80px] sm:text-[60px] xs:text-[50px] text-[40px] tracking-tightest leading-tight">Contact.</h3>
+
+          <div className="mt-8 flex flex-wrap gap-6">
+            <a href="mailto:amir.bemani.p@gmail.com" className="hover-target flex items-center gap-3 text-white/60 hover:text-[#915eff] transition-colors group">
+              <div className="w-10 h-10 rounded-full bg-tertiary flex justify-center items-center group-hover:scale-110 transition-transform">
+                <FaEnvelope size={18} />
+              </div>
+              <span className="font-mono text-sm tracking-wider">amir.bemani.p@gmail.com</span>
+            </a>
+            <a href="tel:+4917673539825" className="hover-target flex items-center gap-3 text-white/60 hover:text-[#915eff] transition-colors group">
+              <div className="w-10 h-10 rounded-full bg-tertiary flex justify-center items-center group-hover:scale-110 transition-transform">
+                <FaPhone size={18} />
+              </div>
+              <span className="font-mono text-sm tracking-wider">+49 176 73539825</span>
+            </a>
+            <a href="https://wa.me/4917673539825" target="_blank" rel="noreferrer" className="hover-target flex items-center gap-3 text-white/60 hover:text-[#915eff] transition-colors group">
+              <div className="w-10 h-10 rounded-full bg-tertiary flex justify-center items-center group-hover:scale-110 transition-transform">
+                <FaWhatsapp size={18} />
+              </div>
+              <span className="font-mono text-sm tracking-wider">WhatsApp</span>
+            </a>
+          </div>
 
           <form
             ref={formRef}

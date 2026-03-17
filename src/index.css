@@ -10,6 +10,11 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
   color-scheme: dark;
+  cursor: none !important;
+}
+
+a, button, .hover-target {
+  cursor: none !important;
 }
 
 .hash-span {
@@ -135,7 +140,7 @@
 }
 
 .text-giant {
-  font-size: clamp(4rem, 9vw, 7rem);
+  font-size: clamp(3.4rem, 7.6vw, 6rem);
   line-height: 0.95;
   letter-spacing: -0.05em;
 }
